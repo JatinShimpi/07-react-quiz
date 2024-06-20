@@ -11,7 +11,7 @@ import FinishedScreen from "./FinishedScreen";
 import Footer from "./Footer";
 import Timer from "./Timer";
 
-const SECS_PER_QUESTION = 30
+const SECS_PER_QUESTION = 30;
 
 const initialState = {
   questions: [],
@@ -37,7 +37,11 @@ function reducer(state, action) {
         status: "error",
       };
     case "start":
-      return { ...state, status: "active",secondsRemaining:state.questions.length*SECS_PER_QUESTION };
+      return {
+        ...state,
+        status: "active",
+        secondsRemaining: state.questions.length * SECS_PER_QUESTION,
+      };
 
     case "newAnswer":
       const question = state.questions.at(state.index);
@@ -94,12 +98,12 @@ export default function App() {
   );
 
   useEffect(function () {
-    fetch("https://earnest-rabanadas-1e7e15.netlify.app/questions.json")
+    fetch("http://localhost:8000/questions")
       .then((res) => res.json())
       .then((data) => dispatch({ type: "dataReceived", payload: data }))
       .catch((err) => dispatch({ type: "dataFailed" }));
   }, []);
-
+  
   return (
     <div className="app">
       <Header></Header>
