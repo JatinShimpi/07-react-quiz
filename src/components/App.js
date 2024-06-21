@@ -98,12 +98,12 @@ export default function App() {
   );
 
   useEffect(function () {
-    fetch("/questions.json")
+    fetch("https://jatinshimpi.github.io/react-quiz-questions/questions.json")
       .then((res) => res.json())
       .then((data) => dispatch({ type: "dataReceived", payload: data }))
       .catch((err) => dispatch({ type: "dataFailed" }));
   }, []);
-  
+
   return (
     <div className="app">
       <Header></Header>
